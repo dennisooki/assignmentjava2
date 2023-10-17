@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,7 +38,13 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
 
+
         addButton.setOnClickListener(v -> {
+            if (areFieldsEmpty()) {
+                resultView.setText("Error");
+                Toast.makeText(getApplicationContext(), "Please enter numbers in both fields.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             double firstNumber = Double.parseDouble(inputFirstNumber.getText().toString());
             double secondNumber = Double.parseDouble(inputSecondNumber.getText().toString());
@@ -46,12 +53,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
         subtractButton.setOnClickListener(v -> {
+            if (areFieldsEmpty()) {
+                resultView.setText("Error");
+                Toast.makeText(getApplicationContext(), "Please enter numbers in both fields.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             double firstNumber = Double.parseDouble(inputFirstNumber.getText().toString());
             double secondNumber = Double.parseDouble(inputSecondNumber.getText().toString());
             double result = firstNumber - secondNumber;
             resultView.setText(Double.toString(result));
         });
         divideButton.setOnClickListener(v -> {
+            if (areFieldsEmpty()) {
+                resultView.setText("Error");
+                Toast.makeText(getApplicationContext(), "Please enter numbers in both fields.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             double firstNumber = Double.parseDouble(inputFirstNumber.getText().toString());
             double secondNumber = Double.parseDouble(inputSecondNumber.getText().toString());
             //validate that the division is valid
@@ -63,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
             resultView.setText(Double.toString(result));
         });
         multiplyButton.setOnClickListener(v -> {
+            if (areFieldsEmpty()) {
+                resultView.setText("Error");
+                Toast.makeText(getApplicationContext(), "Please enter numbers in both fields.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             double firstNumber = Double.parseDouble(inputFirstNumber.getText().toString());
             double secondNumber = Double.parseDouble(inputSecondNumber.getText().toString());
             double result = firstNumber * secondNumber;
@@ -78,5 +100,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+    boolean areFieldsEmpty() {
+        return (inputFirstNumber.getText().toString().isEmpty() || inputSecondNumber.getText().toString().isEmpty());
     }
 }
